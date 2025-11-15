@@ -1,0 +1,7 @@
+{
+  "name": "AI Comic Book Generator",
+  "description": "Create stunning comic book panels by generating consistent characters and backgrounds, crafting a story with AI, and compositing them into a final scene. Powered by Gemini Pro, Imagen 4, and Gemini 2.5 Flash Image.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
