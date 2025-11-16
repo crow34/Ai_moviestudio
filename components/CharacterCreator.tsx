@@ -64,16 +64,15 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
       
       let prompt = '';
       if (artStyle === 'Photo Realistic') {
-        prompt = `Redraw the person in the uploaded photo with the following changes, maintaining a photorealistic style. ${commonPrompt} The person must retain the key facial features from the photo. The final image should look like a high-resolution photograph, not a drawing or illustration. Ensure the background is plain and neutral (e.g., solid grey or white).`;
+        prompt = `Stylize the person in this photo to be photorealistic, with these changes: ${commonPrompt}. It's important to keep their key facial features. The background should be plain and neutral, like a solid grey color.`;
       } else {
-        prompt = `Convert the uploaded photo of a person into a comic book character in ${styleDescription}. ${commonPrompt} The character must retain the key features of the person in the photo but be fully stylized for a comic book. Ensure the background is plain and neutral (e.g., solid grey or white) to make it easy to composite later.`;
+        prompt = `Stylize the person in this photo as a comic book character in the following style: ${styleDescription}. Please apply these changes: ${commonPrompt}. It's important to keep their key features from the photo. The background should be plain and neutral, like a solid grey color.`;
       }
       
       const responseBase64 = await transformImage(base64Data, prompt, mimeType);
       setGeneratedCharacter(responseBase64);
     } catch (error) {
-      console.error("Failed to generate character:", error);
-      alert("Failed to generate character. Check the console for details.");
+      alert((error as Error).message);
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +94,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
 
 
   return (
-    <div className="bg-slate-800/50 rounded-lg p-6 flex flex-col gap-4">
+    <div className="bg-zinc-900/70 backdrop-blur-xl border border-zinc-700 rounded-2xl p-6 flex flex-col gap-4">
       <div className="flex items-center gap-3">
         <SparkleIcon className="w-6 h-6 text-yellow-400" />
         <h2 className="text-xl font-semibold">Create Character from Photo</h2>
@@ -104,11 +103,11 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
         {/* Upload Area */}
-        <div className="w-full aspect-square bg-slate-700/50 rounded-md flex items-center justify-center overflow-hidden border-2 border-dashed border-slate-600">
+        <div className="w-full aspect-square bg-zinc-950/50 rounded-xl flex items-center justify-center overflow-hidden border-2 border-dashed border-zinc-800">
             {uploadedImage ? (
                 <img src={uploadedImage} alt="Uploaded preview" className="w-full h-full object-contain" />
             ) : (
-                <div className="text-center text-slate-500 p-4">
+                <div className="text-center text-zinc-500 p-4">
                     <ImageIcon className="w-12 h-12 mx-auto mb-2" />
                     <p>Upload a photo of yourself</p>
                 </div>
@@ -116,7 +115,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
         </div>
 
         {/* Generated Character Area */}
-        <div className="w-full aspect-square bg-slate-900 rounded-md flex items-center justify-center overflow-hidden border border-slate-700">
+        <div className="w-full aspect-square bg-zinc-950 rounded-xl flex items-center justify-center overflow-hidden border border-zinc-700">
           {isLoading ? (
             <div className="flex flex-col items-center gap-2 text-slate-400">
               <Spinner />
@@ -125,7 +124,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
           ) : generatedCharacter ? (
             <img src={`data:image/jpeg;base64,${generatedCharacter}`} alt="Generated Character" className="w-full h-full object-contain" />
           ) : (
-            <p className="text-slate-500 p-4 text-center">Your generated character will appear here.</p>
+            <p className="text-zinc-500 p-4 text-center">Your generated character will appear here.</p>
           )}
         </div>
       </div>
@@ -149,7 +148,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
                 value={characterName}
                 onChange={(e) => setCharacterName(e.target.value)}
                 placeholder="Enter character name..."
-                className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-green-500 focus:outline-none"
             />
         </div>
       )}
@@ -165,7 +164,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
                 value={wardrobe}
                 onChange={(e) => setWardrobe(e.target.value)}
                 placeholder="e.g., Red superhero cape"
-                className="w-full bg-slate-700 border border-slate-600 rounded-md p-2 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
                 disabled={isLoading || !uploadedImage}
             />
         </div>
@@ -179,7 +178,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
                 value={pose}
                 onChange={(e) => setPose(e.target.value)}
                 placeholder="e.g., Arms crossed"
-                className="w-full bg-slate-700 border border-slate-600 rounded-md p-2 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
                 disabled={isLoading || !uploadedImage}
             />
         </div>
@@ -193,7 +192,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
                 value={expression}
                 onChange={(e) => setExpression(e.target.value)}
                 placeholder="e.g., Determined look"
-                className="w-full bg-slate-700 border border-slate-600 rounded-md p-2 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
                 disabled={isLoading || !uploadedImage}
             />
         </div>
@@ -205,10 +204,10 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
                 id="char-creator-body-shape"
                 value={bodyShape}
                 onChange={(e) => setBodyShape(e.target.value as BodyShape)}
-                className="w-full bg-slate-700 border border-slate-600 rounded-md p-2 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none h-full"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-2 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none h-full"
                 disabled={isLoading || !uploadedImage}
             >
-                {BODY_SHAPES_PHOTO.map(shape => <option key={shape.value} value={shape.value} className="bg-slate-800">{shape.label}</option>)}
+                {BODY_SHAPES_PHOTO.map(shape => <option key={shape.value} value={shape.value} className="bg-zinc-800">{shape.label}</option>)}
             </select>
         </div>
       </div>
@@ -216,7 +215,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
          <button
           onClick={triggerFileUpload}
-          className="bg-slate-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-slate-700 transition-colors flex items-center justify-center gap-2"
+          className="bg-zinc-800 text-white font-semibold rounded-lg px-4 py-3 hover:bg-zinc-700 transition-colors flex items-center justify-center gap-2"
         >
           {uploadedImage ? 'Change Photo' : 'Upload Photo'}
         </button>
@@ -225,17 +224,17 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
             id="char-creator-art-style"
             value={artStyle}
             onChange={(e) => setArtStyle(e.target.value as ArtStyle)}
-            className="w-full bg-slate-700 border border-slate-600 rounded-md p-2 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none h-full"
+            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-yellow-500 focus:outline-none h-full"
             disabled={isLoading || !uploadedImage}
           >
-            {ART_STYLES.map(style => <option key={style.value} value={style.value} className="bg-slate-800">{style.label}</option>)}
+            {ART_STYLES.map(style => <option key={style.value} value={style.value} className="bg-zinc-800">{style.label}</option>)}
           </select>
         </div>
          {!generatedCharacter ? (
             <button
             onClick={handleGenerateClick}
             disabled={isLoading || !uploadedImage}
-            className="bg-yellow-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-yellow-700 disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            className="bg-yellow-600 text-white font-semibold rounded-lg px-4 py-3 hover:bg-yellow-700 disabled:bg-zinc-700 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
             >
             {isLoading ? <Spinner /> : 'Generate Character'}
             </button>
@@ -243,7 +242,7 @@ const CharacterCreator: React.FC<CharacterCreatorProps> = ({ onAddCharacter }) =
             <button
             onClick={handleAddToLibrary}
             disabled={!characterName.trim()}
-            className="bg-green-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-green-700 transition-colors flex items-center justify-center gap-2 disabled:bg-slate-600 disabled:cursor-not-allowed"
+            className="bg-green-600 text-white font-semibold rounded-lg px-4 py-3 hover:bg-green-700 transition-colors flex items-center justify-center gap-2 disabled:bg-zinc-700 disabled:cursor-not-allowed"
             >
             Add to Library
             </button>

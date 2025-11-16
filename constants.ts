@@ -4,10 +4,16 @@ export const ASPECT_RATIOS: AspectRatio[] = ['1:1', '16:9', '21:9', '9:16', '4:3
 
 export const IMAGEN_ASPECT_RATIOS: AspectRatio[] = ['1:1', '16:9', '9:16', '4:3', '3:4'];
 
+export const VEO_ASPECT_RATIOS: AspectRatio[] = ['16:9', '9:16'];
+
 export const ART_STYLES: { value: ArtStyle, label: string }[] = [
   { value: 'None', label: 'Default Style' },
   { value: 'Photo Realistic', label: 'Photo Realistic' },
   { value: 'Pixar', label: 'Pixar Animation' },
+  { value: 'Don Bluth', label: 'Don Bluth Animation' },
+  { value: 'The Simpsons', label: 'The Simpsons Animation' },
+  { value: 'South Park', label: 'South Park Animation' },
+  { value: 'Anime / Manga', label: 'Anime / Manga' },
   { value: 'Creepshow', label: 'Creepshow' },
   { value: 'Frank Miller', label: 'Frank Miller' },
   { value: 'Jack Kirby', label: 'Jack Kirby' },
@@ -123,4 +129,21 @@ export const POST_FX_TYPES: { value: PostFxType, label: string }[] = [
   { value: 'Bloom', label: 'Bloom (Ethereal Glow)' },
   { value: 'Motion Blur', label: 'Motion Blur (Speed)' },
   { value: 'Chromatic Aberration', label: 'Chromatic Aberration (Lens Distortion)' },
+];
+
+export const BACKGROUND_MUSIC_OPTIONS: { value: string, label: string }[] = [
+  { value: 'none', label: 'None' },
+  { value: 'https://storage.googleapis.com/vimeo-test/dramatic-score.mp3', label: 'Dramatic Score' },
+  { value: 'https://storage.googleapis.com/vimeo-test/suspenseful-drone.mp3', label: 'Suspenseful Drone' },
+  { value: 'https://storage.googleapis.com/vimeo-test/upbeat-adventure.mp3', label: 'Upbeat Adventure' },
+  { value: 'https://storage.googleapis.com/vimeo-test/sci-fi-ambient.mp3', label: 'Sci-Fi Ambient' },
+];
+
+export const COMIC_GENRES: { value: string, label: string }[] = [
+  { value: 'Action', label: 'Action / Superhero' },
+  { value: 'Horror', label: 'Horror / Thriller' },
+  { value: 'Comedy', label: 'Comedy / Cartoon' },
+  { value: 'Sci-Fi', label: 'Sci-Fi / Fantasy' },
+  { value: 'Romance', label: 'Romance / Drama' },
+  { value: 'Noir', label: 'Noir / Detective' },
 ];

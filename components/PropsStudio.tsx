@@ -62,12 +62,12 @@ const PropsStudio: React.FC<PropsStudioProps> = ({
         />
       </div>
 
-      <div className="bg-slate-800/50 rounded-lg p-6 flex flex-col gap-4 h-full sticky top-24">
+      <div className="bg-zinc-900/70 backdrop-blur-xl border border-zinc-700 rounded-2xl p-6 flex flex-col gap-4 h-full sticky top-24">
         <div className="flex items-center gap-3">
           <CubeIcon className="w-6 h-6 text-green-400" />
           <h2 className="text-xl font-semibold">2. Props Department</h2>
         </div>
-        <div className="flex items-center gap-2 bg-slate-700/50 p-2 rounded-md text-sm text-slate-400">
+        <div className="flex items-center gap-2 bg-zinc-800/50 p-3 rounded-lg text-sm text-slate-400">
           <SparkleIcon className="w-5 h-5 text-green-400 flex-shrink-0" />
           <span>Using Gemini 2.5 Flash Image to add props to your scene.</span>
         </div>
@@ -76,7 +76,7 @@ const PropsStudio: React.FC<PropsStudioProps> = ({
           value={propInstructions}
           onChange={(e) => setPropInstructions(e.target.value)}
           placeholder="Describe the prop to add. e.g., 'A mysterious glowing orb on the table', 'A vintage red telephone on the desk'"
-          className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-green-500 focus:outline-none resize-none"
+          className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-green-500 focus:outline-none resize-none"
           rows={3}
           disabled={isLoading || !selectedScene}
         />
@@ -84,7 +84,7 @@ const PropsStudio: React.FC<PropsStudioProps> = ({
         <button
           onClick={handleGenerate}
           disabled={isLoading || !canGenerate}
-          className="w-full bg-green-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-green-700 disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-lg px-4 py-3 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center gap-2"
         >
           {isLoading ? <Spinner /> : 'Add Prop to Scene'}
         </button>
@@ -92,17 +92,17 @@ const PropsStudio: React.FC<PropsStudioProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             <div className="flex flex-col gap-2">
                 <h3 className="text-center font-semibold text-slate-400">Original Scene</h3>
-                <div className="aspect-square bg-slate-900 rounded-md flex items-center justify-center overflow-hidden border border-slate-700">
+                <div className="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center overflow-hidden border border-zinc-700">
                     {selectedScene ? (
                         <img src={`data:image/jpeg;base64,${selectedScene.base64}`} alt="Original Scene" className="w-full h-full object-contain" />
                     ) : (
-                         <p className="text-slate-500 p-4 text-center">Select a scene from the library.</p>
+                         <p className="text-zinc-500 p-4 text-center">Select a scene from the library.</p>
                     )}
                 </div>
             </div>
              <div className="flex flex-col gap-2">
                 <h3 className="text-center font-semibold text-slate-400">New Scene with Prop</h3>
-                <div className="aspect-square bg-slate-900 rounded-md flex items-center justify-center overflow-hidden border border-slate-700">
+                <div className="aspect-square bg-zinc-950 rounded-xl flex items-center justify-center overflow-hidden border border-zinc-700">
                 {isLoading ? (
                     <div className="flex flex-col items-center gap-2 text-slate-400">
                     <Spinner />
@@ -111,7 +111,7 @@ const PropsStudio: React.FC<PropsStudioProps> = ({
                 ) : propPanel ? (
                     <img src={`data:image/jpeg;base64,${propPanel.image.base64}`} alt="Scene with Prop" className="w-full h-full object-contain" />
                 ) : (
-                    <p className="text-slate-500 p-4 text-center">Your new scene will appear here.</p>
+                    <p className="text-zinc-500 p-4 text-center">Your new scene will appear here.</p>
                 )}
                 </div>
             </div>
@@ -121,7 +121,7 @@ const PropsStudio: React.FC<PropsStudioProps> = ({
             <button
                 onClick={handleReplace}
                 disabled={isLoading}
-                className="w-full bg-blue-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-blue-700 disabled:bg-slate-600 transition-colors flex items-center justify-center gap-2 mt-4"
+                className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg px-4 py-3 hover:opacity-90 disabled:opacity-50 transition-opacity flex items-center justify-center gap-2 mt-4"
             >
                 Replace in Library
             </button>

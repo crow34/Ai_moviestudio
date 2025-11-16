@@ -28,7 +28,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ title, images, maxItems = 4
   };
 
   return (
-    <div className="bg-slate-800/50 rounded-lg p-6">
+    <div className="bg-zinc-900/70 backdrop-blur-xl border border-zinc-700 rounded-2xl p-6">
       <h2 className="text-xl font-semibold mb-4 text-slate-200">{title} ({images.length}/{maxItems})</h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {slots.map((_, index) => {
@@ -39,10 +39,10 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ title, images, maxItems = 4
             <div
               key={index}
               onClick={() => image && onSelect?.(image)}
-              className={`group relative aspect-square rounded-md overflow-hidden flex items-center justify-center transition-all
-                ${isSelectable ? 'cursor-pointer' : ''}
-                ${isSelected ? 'ring-4 ring-blue-500' : 'ring-2 ring-slate-700'}
-                ${image ? 'bg-slate-700' : 'bg-slate-800 border-2 border-dashed border-slate-700'}`
+              className={`group relative aspect-square rounded-xl overflow-hidden flex items-center justify-center transition-all
+                ${isSelectable ? 'cursor-pointer hover:ring-blue-500' : ''}
+                ${isSelected ? 'ring-4 ring-blue-500' : 'ring-2 ring-transparent'}
+                ${image ? 'bg-zinc-800' : 'bg-zinc-950/50 border-2 border-dashed border-zinc-800'}`
               }
             >
               {image ? (
@@ -51,7 +51,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ title, images, maxItems = 4
                     src={`data:image/jpeg;base64,${image.base64}`}
                     alt={image.prompt}
                     title={image.prompt}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
                   />
                   {image.name && (
                     <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs text-center p-1 truncate backdrop-blur-sm">
@@ -61,7 +61,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ title, images, maxItems = 4
                   {allowExport && (
                     <button
                       onClick={(e) => handleDownload(e, image)}
-                      className="absolute top-2 right-2 bg-blue-600/50 text-white p-2 rounded-full hover:bg-blue-600 transition-colors backdrop-blur-sm opacity-0 group-hover:opacity-100"
+                      className="absolute top-2 right-2 bg-black/50 text-white p-2 rounded-full hover:bg-blue-600 transition-colors backdrop-blur-sm opacity-0 group-hover:opacity-100"
                       title={image.name ? 'Save Character Image' : 'Save Scene Image'}
                       aria-label={image.name ? 'Save Character Image' : 'Save Scene Image'}
                     >
@@ -70,7 +70,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ title, images, maxItems = 4
                   )}
                 </>
               ) : (
-                <span className="text-slate-500 text-xs text-center">Empty Slot</span>
+                <span className="text-zinc-500 text-xs text-center">Empty Slot</span>
               )}
             </div>
           );

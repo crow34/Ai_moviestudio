@@ -68,12 +68,12 @@ const SceneStudio: React.FC<SceneStudioProps> = ({ scenes, onGenerate, onAddScen
     <div className="space-y-8">
       <SceneCreatorFromUpload onAddScene={onAddScene} />
       <SceneCreatorFromCamera onAddScene={onAddScene} />
-      <div className="bg-slate-800/50 rounded-lg p-6 flex flex-col gap-4">
+      <div className="bg-zinc-900/70 backdrop-blur-xl border border-zinc-700 rounded-2xl p-6 flex flex-col gap-4">
         <div className="flex items-center gap-3">
           <ImageIcon className="w-6 h-6 text-purple-400" />
           <h2 className="text-xl font-semibold">Scene Generator (from Text)</h2>
         </div>
-        <div className="flex items-center gap-2 bg-slate-700/50 p-2 rounded-md text-sm text-slate-400">
+        <div className="flex items-center gap-2 bg-zinc-800/50 p-3 rounded-lg text-sm text-slate-400">
           <PaintBrushIcon className="w-5 h-5 text-purple-400 flex-shrink-0" />
           <span>The art style selected in the header will be applied to your scene.</span>
         </div>
@@ -82,7 +82,7 @@ const SceneStudio: React.FC<SceneStudioProps> = ({ scenes, onGenerate, onAddScen
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="e.g., A futuristic city on Mars, towering skyscrapers, two suns in the sky"
-          className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none resize-none"
+          className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none resize-none"
           rows={3}
           disabled={isLoading || !canGenerate}
         />
@@ -93,7 +93,7 @@ const SceneStudio: React.FC<SceneStudioProps> = ({ scenes, onGenerate, onAddScen
               id="scene-aspect-ratio"
               value={aspectRatio}
               onChange={(e) => setAspectRatio(e.target.value as AspectRatio)}
-              className="w-full bg-slate-700 border border-slate-600 rounded-md p-2 text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-purple-500 focus:outline-none"
               disabled={isLoading || !canGenerate}
             >
               {IMAGEN_ASPECT_RATIOS.map(ratio => <option key={ratio} value={ratio}>{ratio}</option>)}
@@ -102,7 +102,7 @@ const SceneStudio: React.FC<SceneStudioProps> = ({ scenes, onGenerate, onAddScen
           <button
             onClick={handleGenerate}
             disabled={isLoading || !prompt.trim() || !canGenerate}
-            className="flex-1 self-end bg-purple-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-purple-700 disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            className="flex-1 self-end bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg px-4 py-3 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center gap-2"
           >
             {isLoading ? <Spinner /> : 'Generate Scene'}
           </button>
@@ -111,15 +111,15 @@ const SceneStudio: React.FC<SceneStudioProps> = ({ scenes, onGenerate, onAddScen
       </div>
       <ImageGallery title="Scene Library" images={scenes} maxItems={8} allowExport />
 
-      <div className="bg-slate-800/50 rounded-lg p-6">
+      <div className="bg-zinc-900/70 backdrop-blur-xl border border-zinc-700 rounded-2xl p-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-lg font-semibold text-slate-200">Library Management</h3>
             <p className="text-sm text-slate-400">Save your scene library to a file or load an existing one.</p>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
-            <button onClick={handleExport} disabled={scenes.length === 0} className="bg-slate-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-slate-700 disabled:bg-slate-700/50 disabled:cursor-not-allowed transition-colors">Export</button>
-            <button onClick={triggerImport} className="bg-slate-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-slate-700 transition-colors">Import</button>
+            <button onClick={handleExport} disabled={scenes.length === 0} className="bg-zinc-800 text-white font-semibold rounded-lg px-4 py-2 hover:bg-zinc-700 disabled:bg-zinc-900 disabled:text-slate-500 disabled:cursor-not-allowed transition-colors">Export</button>
+            <button onClick={triggerImport} className="bg-zinc-800 text-white font-semibold rounded-lg px-4 py-2 hover:bg-zinc-700 transition-colors">Import</button>
             <input type="file" ref={importInputRef} onChange={handleImport} accept=".json" className="hidden" />
           </div>
         </div>

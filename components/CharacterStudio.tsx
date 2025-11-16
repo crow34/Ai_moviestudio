@@ -21,7 +21,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
   const [pose, setPose] = useState('');
   const [expression, setExpression] = useState('');
   const [bodyShape, setBodyShape] = useState<BodyShape>('Default');
-  const [aspectRatio, setAspectRatio] = useState<AspectRatio>('1:1');
+  const [aspectRatio, setAspectRatio] = useState<AspectRatio>('3:4');
   const canGenerate = characters.length < 4;
   const importInputRef = useRef<HTMLInputElement>(null);
   const importImageInputRef = useRef<HTMLInputElement>(null);
@@ -111,7 +111,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
   return (
     <div className="space-y-8">
       <CharacterCreator onAddCharacter={onAddCharacter} />
-      <div className="bg-slate-800/50 rounded-lg p-6 flex flex-col gap-4">
+      <div className="bg-zinc-900/70 backdrop-blur-xl border border-zinc-700 rounded-2xl p-6 flex flex-col gap-4">
         <div className="flex items-center gap-3">
           <UserIcon className="w-6 h-6 text-blue-400" />
           <h2 className="text-xl font-semibold">Character Generator (from Text)</h2>
@@ -124,7 +124,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="e.g., A brave space explorer wearing a blue suit..."
-                className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
                 rows={3}
                 disabled={isLoading || !canGenerate}
             />
@@ -138,7 +138,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g., Captain Eva"
-                    className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     disabled={isLoading || !canGenerate}
                  />
             </div>
@@ -150,7 +150,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
                     value={outfit}
                     onChange={(e) => setOutfit(e.target.value)}
                     placeholder="e.g., High-tech silver armor"
-                    className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     disabled={isLoading || !canGenerate}
                  />
             </div>
@@ -160,7 +160,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
                     id="char-body-shape"
                     value={bodyShape}
                     onChange={(e) => setBodyShape(e.target.value as BodyShape)}
-                    className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none h-full"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none h-full"
                     disabled={isLoading || !canGenerate}
                 >
                     {BODY_SHAPES_TEXT.map(shape => <option key={shape.value} value={shape.value}>{shape.label}</option>)}
@@ -174,7 +174,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
                     value={pose}
                     onChange={(e) => setPose(e.target.value)}
                     placeholder="e.g., Standing heroically"
-                    className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     disabled={isLoading || !canGenerate}
                  />
             </div>
@@ -186,7 +186,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
                     value={expression}
                     onChange={(e) => setExpression(e.target.value)}
                     placeholder="e.g., A confident smile"
-                    className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     disabled={isLoading || !canGenerate}
                  />
             </div>
@@ -198,7 +198,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
               id="char-aspect-ratio"
               value={aspectRatio}
               onChange={(e) => setAspectRatio(e.target.value as AspectRatio)}
-              className="w-full bg-slate-700 border border-slate-600 rounded-md p-2 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               disabled={isLoading || !canGenerate}
             >
               {IMAGEN_ASPECT_RATIOS.map(ratio => <option key={ratio} value={ratio}>{ratio}</option>)}
@@ -207,7 +207,7 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
           <button
             onClick={handleGenerate}
             disabled={isLoading || !prompt.trim() || !name.trim() || !canGenerate}
-            className="flex-1 self-end bg-blue-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-blue-700 disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            className="flex-1 self-end bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg px-4 py-3 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center gap-2"
           >
             {isLoading ? <Spinner /> : 'Generate Character'}
           </button>
@@ -216,16 +216,16 @@ const CharacterStudio: React.FC<CharacterStudioProps> = ({ characters, onGenerat
       </div>
       <ImageGallery title="Character Library" images={characters} allowExport />
       
-      <div className="bg-slate-800/50 rounded-lg p-6">
+      <div className="bg-zinc-900/70 backdrop-blur-xl border border-zinc-700 rounded-2xl p-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-lg font-semibold text-slate-200">Library Management</h3>
             <p className="text-sm text-slate-400">Save your character library to a file or load an existing one.</p>
           </div>
           <div className="flex flex-wrap items-center gap-2 flex-shrink-0">
-            <button onClick={handleExport} disabled={characters.length === 0} className="bg-slate-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-slate-700 disabled:bg-slate-700/50 disabled:cursor-not-allowed transition-colors">Export</button>
-            <button onClick={triggerImport} className="bg-slate-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-slate-700 transition-colors">Import (.json)</button>
-            <button onClick={triggerImageImport} className="bg-slate-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-slate-700 transition-colors">Import (Image)</button>
+            <button onClick={handleExport} disabled={characters.length === 0} className="bg-zinc-800 text-white font-semibold rounded-lg px-4 py-2 hover:bg-zinc-700 disabled:bg-zinc-900 disabled:text-slate-500 disabled:cursor-not-allowed transition-colors">Export</button>
+            <button onClick={triggerImport} className="bg-zinc-800 text-white font-semibold rounded-lg px-4 py-2 hover:bg-zinc-700 transition-colors">Import (.json)</button>
+            <button onClick={triggerImageImport} className="bg-zinc-800 text-white font-semibold rounded-lg px-4 py-2 hover:bg-zinc-700 transition-colors">Import (Image)</button>
             <input type="file" ref={importInputRef} onChange={handleImport} accept=".json" className="hidden" />
             <input type="file" ref={importImageInputRef} onChange={handleImageImport} accept="image/jpeg,image/png" className="hidden" />
           </div>

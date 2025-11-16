@@ -76,15 +76,16 @@ const VFXStudio: React.FC<VFXStudioProps> = ({
           selectedIds={selectedScene ? [selectedScene.id] : []}
           onSelect={onSelectScene}
           isSelectable
+          maxItems={8}
         />
       </div>
 
-      <div className="bg-slate-800/50 rounded-lg p-6 flex flex-col gap-4 h-full sticky top-24">
+      <div className="bg-zinc-900/70 backdrop-blur-xl border border-zinc-700 rounded-2xl p-6 flex flex-col gap-4 h-full sticky top-24">
         <div className="flex items-center gap-3">
           <FireIcon className="w-6 h-6 text-orange-400" />
           <h2 className="text-xl font-semibold">3. Create VFX Panel</h2>
         </div>
-        <div className="flex items-center gap-2 bg-slate-700/50 p-2 rounded-md text-sm text-slate-400">
+        <div className="flex items-center gap-2 bg-zinc-800/50 p-3 rounded-lg text-sm text-slate-400">
           <SparkleIcon className="w-5 h-5 text-orange-400 flex-shrink-0" />
           <span>Using Gemini 2.5 Flash Image to generate dynamic effects.</span>
         </div>
@@ -93,7 +94,7 @@ const VFXStudio: React.FC<VFXStudioProps> = ({
           value={vfxInstructions}
           onChange={(e) => setVfxInstructions(e.target.value)}
           placeholder="Describe the VFX and the character's reaction. e.g., 'A huge fiery explosion erupts behind the character. The character should be diving away from the blast, with a shocked expression.'"
-          className="w-full bg-slate-700 border border-slate-600 rounded-md p-3 text-slate-200 focus:ring-2 focus:ring-orange-500 focus:outline-none resize-none"
+          className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-slate-200 focus:ring-2 focus:ring-orange-500 focus:outline-none resize-none"
           rows={5}
           disabled={isLoading || !selectedCharacter || !selectedScene}
         />
@@ -104,7 +105,7 @@ const VFXStudio: React.FC<VFXStudioProps> = ({
                 id="panel-size"
                 value={aspectRatio}
                 onChange={(e) => setAspectRatio(e.target.value as AspectRatio)}
-                className="w-full bg-slate-700 border border-slate-600 rounded-md p-2 text-sm text-slate-200 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-lg p-3 text-sm text-slate-200 focus:ring-2 focus:ring-orange-500 focus:outline-none"
                 disabled={isLoading || !selectedCharacter || !selectedScene}
             >
                 {ASPECT_RATIOS.map(ratio => <option key={ratio} value={ratio}>{ratio}</option>)}
@@ -114,12 +115,12 @@ const VFXStudio: React.FC<VFXStudioProps> = ({
         <button
           onClick={handleGenerate}
           disabled={isLoading || !canGenerate}
-          className="w-full bg-orange-600 text-white font-semibold rounded-md px-4 py-2 hover:bg-orange-700 disabled:bg-slate-600 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 mt-auto"
+          className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white font-semibold rounded-lg px-4 py-3 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center justify-center gap-2 mt-auto"
         >
           {isLoading ? <Spinner /> : 'Generate VFX Panel'}
         </button>
 
-        <div className={`relative ${aspectRatioClasses[aspectRatio]} w-full bg-slate-900 rounded-md mt-2 flex items-center justify-center overflow-hidden border border-slate-700`}>
+        <div className={`relative ${aspectRatioClasses[aspectRatio]} w-full bg-zinc-950 rounded-lg mt-2 flex items-center justify-center overflow-hidden border border-zinc-700`}>
           {isLoading ? (
             <div className="flex flex-col items-center gap-2 text-slate-400">
               <Spinner />
